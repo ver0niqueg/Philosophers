@@ -1,0 +1,40 @@
+Philospher = thread
+Fork = mutex
+Manger - dormir - reflechir
+Chaque philosopher a besoin de deux fourchettes pour manger sachant
+qu'il y a autant de fourchette que de philosophe.
+Aucun philosophe ne doit mourir de faim !!
+
+./philo arg1 arg2 arg3 arg4 arg5
+arg1 = number_of_philosophers (also the nb of forks)
+arg2 = time_to_die (s'il a pas mange depuis time_to_die millisec il
+meurt)
+arg3 = time_to_eat (temps pour manger avec 2 fourchettes en milisec)
+arg4 = time_to_sleep (temps pour dodo en milisec)
+arg5 = number_of_times_each_philosopher_must_eat (nb de fois que
+chaque philosophe doit manger, arg optionnel)
+
+Les threads sont des unites d'execution au sein d'un meme processus.
+Ils partagent les memes ressources du processus mais chacun execcute
+sa propre tache. Cependant, il peut y avoir des pb comme par ex si
+deux threads veulent acceder a la meme variable de la memoire
+partagee au meme moment. Il faut donc utiliser les mutex qui servent
+a verouiller un bout de code, les autres threads vont donc devoir
+attendre qu'il soit deverouille pour pouvoir executer ce bout de code.
+Chaque fourchette a son propre mutex qui permet de la verouiller
+lorsqu'un philosophe la prend. On utilise aussi un mutex partage par
+tous les philosophes qui permet de print du texte sans melanger.
+
+STRATEGIE
+- Faire partir les philos pairs ou impairs avec du retard. Car si
+tous les philosophes commencent en meme temps et prennent leur
+fourchette droite personne ne pourra manger.
+- Chaque philosophe a sa propre fourchette à gauche (l_f) et
+emprunte celle de son voisin a droite grace au pointeur (*r_f) qui
+pointe sur la l_f du voisin de droite
+- Obligee de checker la mort dans un thread a cote sinon ne se rend
+ pas compte a temps si y en a un qui meurt. Mais par contre si le
+ thread check en continue la si le philo est mort ca baisse trop
+ les perfs. Donc a chaque fois qu'un philo va faire ses activites
+ un thread qui check la mort se lance. Et ce thread va
+ usleep(time_to_die) et ensuite checker si le philo est mort.
