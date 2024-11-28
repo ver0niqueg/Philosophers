@@ -38,3 +38,5 @@ pointe sur la l_f du voisin de droite
  les perfs. Donc a chaque fois qu'un philo va faire ses activites
  un thread qui check la mort se lance. Et ce thread va
  usleep(time_to_die) et ensuite checker si le philo est mort.
+
+ FAIRE ROUTINE + MONITORING

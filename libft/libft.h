@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:58:16 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/08/08 10:48:40 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:00:36 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_putptr(uintptr_t num);
 int		ft_print_string(char *s, int *counter);
 void	ft_print_unsigned(unsigned int value, int *counter);
 void	ft_checktype(const char c, va_list value, int *counter);
-int	f	t_printf(const char *str, ...);
+int		ft_printf(const char *str, ...);
 
 char	*ft_free(char **str);
 char	*ft_update_stash(char *stash);

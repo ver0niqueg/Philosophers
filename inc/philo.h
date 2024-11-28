@@ -5,26 +5,54 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 #endif
 
 typedef struct	s_philo
 {
 	pthread_t			thread;
-	int					nb_philos;
+	int					nb_of_philos;
 	int					id;
-	int					is_eating; // si le philo est en train de manger
-	int					meals_eaten; // le nb de repas que le philo a mange -> progression du philo
-	int					nb_times_to_eat; // objectif a atteindre (cb il doit manger)
-	int					*dead; //
-	size_t				time_to_die;
+	int					is_eating;
+	int					meals_count;
+	int					nb_of_times_to_eat; // meal goal
+	int					*dead;
+	size_t				time_to_die; // the time a philo will die if he doesnt eat
 	size_t				time_to_eat;
 	size_t				time_to_sleep;
-	size_t				last_meal; // le temps du dernier repas du philo
-	size_t				start_time; // le temps auquel le philo commence son activite
+	size_t				last_meal;
+	size_t				start_time;
 	pthread_mutex_t		*right_fork;
 	pthread_mutex_t		*left_fork;
-	pthread_mutex_t		*write_lock; //
+	pthread_mutex_t		*print_lock;
 	pthread_mutex_t		*dead_lock;
 	pthread_mutex_t		*meal_lock;
 }						t_philo;
+
+typedef struct	s_simulation
+{
+	int					dead_flag; // flag pour indiquer si un philo est mort
+	pthread_mutex_t		print_lock;
+	pthread_mutex_t		dead_lock;
+	pthread_mutex_t		meal_lock;
+	t_philo				*philos;
+}						t_simulation;
+
+/**** CHECKS *****/
+int			is_digit(char *argv);
+int			check_args(int argc, char **argv);
+
+/**** INITIALIZATION *****/
+void		init_input(t_philo *philo, char **argv);
+void		init_philos(t_philo *philos, t_simulation *simulation,
+			pthread_mutex_t *forks, char **argv);
+void		init_forks(pthread_mutex_t *forks, int philo_nb);
+void		init_simulation(t_simulation *simulation, t_philo *philos);
+
+/**** ACTIONS *****/
+
+/**** UTILS ****/
+static int	ft_isspace(int c);
+long		ft_atol(const char *str);
+
