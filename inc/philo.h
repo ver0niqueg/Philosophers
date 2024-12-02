@@ -54,9 +54,13 @@ void		init_simulation(t_simulation *simulation, t_philo *philos);
 void		print_logs(char *str, t_philo *philo, int id);
 void		philo_is_thinking(t_philo *philos);
 void		philo_is_sleeping(t_philo *philos);
+void		philo_is_eating(t_philo *philo);
+int			philo_is_dead(t_philo *philo, size_t time_to_die);
 
 /**** UTILS ****/
 static int	ft_isspace(int c);
 size_t		ft_strlen(const char *str);
 long		ft_atol(const char *str);
+int			get_time(void);
+int			ft_usleep(size_t milliseconds);
 
