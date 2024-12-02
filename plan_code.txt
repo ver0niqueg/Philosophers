@@ -39,4 +39,31 @@ pointe sur la l_f du voisin de droite
  un thread qui check la mort se lance. Et ce thread va
  usleep(time_to_die) et ensuite checker si le philo est mort.
 
+ OUTPUT :
+ - Timestamp : shows the time in milliseconds since the simulation
+ has started.
+ - Philosopher number : indicates which philosopher is taking the action
+ - Actions : Includes messages about the action (each one in separate
+ line) and it must be display not more than 10ms after the actual time
+
+Key Concepts to Master
+
+    Thread: Each philosopher is represented as a thread, which is a
+	lightweight process capable of running independently, enabling
+	multiple philosophers to think and eat simultaneously ( at the same
+	Time). For example, while Philosopher 1 is thinking, Philosopher 2
+	might be eating because they are separate threads running in parallel.
+	It is a way to mimic real life. Imagine a dinner party where guests
+	can eat or chat. Threads let each philosopher do their own thing
+	concurrently.
+    Mutexes: are used to prevent multiple threads from accessing a
+	shared resource simultaneously to prevent race conditions. In other
+	words, When a thread (a philosopher) wants to access a shared resource
+	(like a fork), it must first acquire a lock on the resource using a
+	mutex. That means only one thread can hold the mutex at a time. If
+	one thread holds the lock, any other thread that tries to acquire
+	the same lock will be blocked until the first thread releases it.
+
  FAIRE ROUTINE + MONITORING
+
+ https://medium.com/@denaelgammal/dining-philosophers-problem-42-project-guide-mandatory-part-a20fb8dc530e

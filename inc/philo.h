@@ -51,8 +51,12 @@ void		init_forks(pthread_mutex_t *forks, int philo_nb);
 void		init_simulation(t_simulation *simulation, t_philo *philos);
 
 /**** ACTIONS *****/
+void		print_logs(char *str, t_philo *philo, int id);
+void		philo_is_thinking(t_philo *philos);
+void		philo_is_sleeping(t_philo *philos);
 
 /**** UTILS ****/
 static int	ft_isspace(int c);
+size_t		ft_strlen(const char *str);
 long		ft_atol(const char *str);
 

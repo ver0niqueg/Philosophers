@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:28:19 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/11/28 20:38:00 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:05:15 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ static int	ft_isspace(int c)
 		|| c == '\v' || c == '\f')
 		return (c);
 	return (0);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
 long	ft_atol(const char *str)
@@ -48,34 +58,4 @@ long	ft_atol(const char *str)
 		i++;
 	}
 	return (nb * sign);
-}
-
-/* fonction pour afficher un message dans un environnement ou il y a plusieurs
-threads -> le but est d'afficher des messages simultanement en utilisant un
-mutex pour synchroniser l'acces a l'operation d'ecriture */
-
-void	print_action(char *str, t_philo *philo, int id)
-{
-	size_t	time;
-
-	pthread_mutex_lock(philo->print_lock);
-	time = get_time();
-	// finir
-}
-
-/* fonction pour recuperer le temps actuel en millisecondes */
-int	get_time(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	// conversion en millisecondes des secondes et des microsecondes
-	return (time.tv_sec * 1000) + (time.tv_usec / 1000);
-}
-
-int	ft_usleep(size_t milliseconds)
-{
-	size_t	start;
-
-	start = get_time();
 }

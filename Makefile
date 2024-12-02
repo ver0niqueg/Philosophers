@@ -1,9 +1,6 @@
 NAME = philo
 
 SRCS_DIR = ./srcs/
-LIBFT_DIR = ./libft/
-
-LIBFT = $(LIBFT_DIR)/libft.a
 
 CC = cc
 RM = rm -f
@@ -13,20 +10,16 @@ SRCS = $(SRCS_DIR)/
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(LIBFT) $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
-			$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
-
-$(LIBFT): $(MAKE) -C $(LIBFT_DIR)
+$(NAME): $(OBJS)
+			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 			$(RM) $(NAME)
-			$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 			$(RM) $(NAME)
-			$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: flcean all
 
