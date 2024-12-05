@@ -57,6 +57,13 @@ void		philo_is_sleeping(t_philo *philos);
 void		philo_is_eating(t_philo *philo);
 int			philo_is_dead(t_philo *philo, size_t time_to_die);
 
+/*** PHILO ROUTINE ****/
+int			dead_loop(t_philo *philo);
+void		*philo_routine(void *arg);
+int			create_philo_threads(t_simulation *simulation, pthread_mutex_t *forks);
+int			join_philo_threads(t_simulation *simulation, pthread_mutex_t *forks);
+int			start_simulation(t_simulation *simulation, pthread_mutex_t *forks);
+
 /**** UTILS ****/
 static int	ft_isspace(int c);
 size_t		ft_strlen(const char *str);

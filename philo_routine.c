@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:29:49 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/03 17:16:48 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/05 18:45:49 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	dead_loop(t_philo *philo)
 
 /* fonction routine de thread avec les actions qu'un philo execute lors
 de la simulation */
-void	philo_routine(void *args) // ou data ?
+void	*philo_routine(void *arg) // ou data ?
 {
 	t_philo *philo;
 
 	// conversion en type t_philo *
-	philo = (t_philo *)args;
+	philo = (t_philo *)arg;
 	// les philo aux id pairs attendent avant de commencer
 	// avec ce depart decale, on evite les deadlock au debut
 	if (philo->id % 2 == 0)
@@ -47,6 +47,57 @@ void	philo_routine(void *args) // ou data ?
 		philo_is_sleeping(philo);
 		philo_is_thinking(philo);
 	}
-	return (0);
+	return (arg);
 }
 // pas besoin de rajouter un ft_usleep ?
+
+/* fonction pour creer les threads observer + philo */
+// faire fonction destroy_all
+
+int	create_philo_threads(t_simulation *simulation, pthread_mutex_t *forks)
+{
+	int	i;
+
+	i = 0;
+	// creation d'un un thread par philo
+	while (i < simulation->philos[0].nb_of_philos)
+	{
+		// associer chaque philo a un thread
+		if (pthread_create(&simulation->philos[i].thread, NULL, &philo_routine,
+				&simulation->philos[i] != 0)) // retourne 0 si ca marche
+			destroy_mutex("Fail to create thread", simulation, forks);
+		i++;
+	}
+	return (0);
+}
+
+int	join_philo_threads(t_simulation *simulation, pthread_mutex_t *forks)
+{
+	int	i;
+
+	i = 0;
+	while (i < simulation->philos[0].nb_of_philos)
+	{
+		if (pthread_join(simulation->philos[i].thread, NULL) != 0)
+			destroy_mutex("Fail to join thread", simulation, forks);
+		i++;
+	}
+	return (0);
+}
+// creer un thread supplementaire pour surveiller l'etat general de la simulation
+int	start_simulation(t_simulation *simulation, pthread_mutex_t *forks)
+{
+	pthread_t	monitor_thread;
+
+	// coder une fonction monitor
+	if (pthread_create(&monitor_thread, NULL, &monitor, simulation->philos != 0))
+		destroy_mutex("Fail to create thread", simulation, forks);
+	create_philo_threads(simulation, forks);
+	// attendre que le thread de surveillance se termine
+	if (pthread_join(&monitor, NULL) != 0)
+		destroy_mutex("Fail to join thread", simulation, forks);
+	join_philo_threads(simulation, forks);
+	return (0);
+}
+
+// dans le fichier monitor faire des check pour avoir si ya un mort, si tous ont mange etc...

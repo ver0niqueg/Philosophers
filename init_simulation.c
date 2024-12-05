@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:25:01 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/11/28 19:31:02 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/05 16:11:42 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	init_philos(t_philo *philos, t_simulation *simulation,
 		philos[i].is_eating = 0;
 		philos[i].meals_count = 0;
 		init_input(&philos[i], argv);
-		philos[i].last_meal =
-		philos[i].start_time =
+		philos[i].last_meal = get_time();
+		philos[i].start_time = get_time();
 		// pour une synchronisation des messages
 		philos[i].print_lock = &simulation->print_lock;
 		// pour gerer l'etat de mort du philosophe
