@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:29:49 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/05 18:45:49 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/06 19:20:16 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	join_philo_threads(t_simulation *simulation, pthread_mutex_t *forks)
 	i = 0;
 	while (i < simulation->philos[0].nb_of_philos)
 	{
+		// la fonction dans la condition creer quand meme le thread
 		if (pthread_join(simulation->philos[i].thread, NULL) != 0)
 			destroy_mutex("Fail to join thread", simulation, forks);
 		i++;

@@ -33,7 +33,7 @@ typedef struct	s_philo
 typedef struct	s_simulation
 {
 	int					dead_flag; // flag pour indiquer si un philo est mort
-	pthread_mutex_t		print_lock;
+	pthread_mutex_t		print_lock; // mutex partagee
 	pthread_mutex_t		dead_lock;
 	pthread_mutex_t		meal_lock;
 	t_philo				*philos;
