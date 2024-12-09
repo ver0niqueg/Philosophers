@@ -6,11 +6,11 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:04:47 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/05 17:43:17 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:40:27 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/philo.h"
+#include "../inc/philo.h"
 
 /* fonction pour recuperer le temps actuel en millisecondes */
 int	get_time(void)

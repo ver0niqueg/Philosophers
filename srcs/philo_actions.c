@@ -6,11 +6,11 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:23:25 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/02 19:27:57 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:23:42 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/philo.h"
+#include "../inc/philo.h"
 
 /* fonction pour afficher un message dans un environnement ou il y a plusieurs
 threads -> le but est d'afficher des messages simultanement en utilisant un
@@ -22,7 +22,7 @@ void	print_logs(char *str, t_philo *philo, int id)
 	pthread_mutex_lock(philo->print_lock);
 	time = get_time() - philo->start_time;
 	// check de l'etat du programme (si un philo est mort par ex)
-	if (!philo_dead(philo)) // coder fonction philo_dead
+	if (!philo_is_dead(philo)) // coder fonction philo_dead
 		// affiche <temps ecoule> <id du philo> et <l'action>
 		printf("%zu, %d, %s\n", time, id, str);
 	// unlock le verrou
@@ -72,23 +72,3 @@ void	philo_is_eating(t_philo *philo)
 }
 
 // gerer le cas lorsqu'il n'y a qu'un seul philo ??
-
-/* fonction qui check si un philo est mort en fonction du
-temps ecoule depuis son dernier repas. Si ce temps est >
-au time_to_die et si le philo n'est pas en train de manger,
-la fonction considere que le philo est dead */
-int	philo_is_dead(t_philo *philo, size_t time_to_die)
-{
-	/* s'assurer qu'aucun autre thread a acces aux infos liees
-	a la nourriture (last_meal et is_eating) */
-	pthread_mutex_lock(philo->meal_lock);
-	if (get_time() - philo->last_meal >= time_to_die
-		&& philo->is_eating == 0)
-	{
-		pthread_mutex_unlock(philo->meal_lock);
-		return (1); // philo is dead
-	}
-	// si le philo is not dead, on libere le mutex et on retourne 0
-	pthread_mutex_unlock(philo->meal_lock);
-	return (0); // philo is not dead
-}

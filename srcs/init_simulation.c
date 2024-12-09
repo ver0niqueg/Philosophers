@@ -6,11 +6,11 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:25:01 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/05 16:11:42 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:44:05 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/philo.h"
+#include "../inc/philo.h"
 
 /* fonction pour initialiser l'input = conversion des arguments char en int
 grace a la fonction ft_atoi */
@@ -34,7 +34,7 @@ void	init_philos(t_philo *philos, t_simulation *simulation,
 	int	i; // variable pour iterer sur chaque philo
 
 	i = 0;
-	while (i < ft_atoi(argv[1]))
+	while (i < ft_atol(argv[1]))
 	{
 		philos[i].id = i + 1; // les id commencent a 1
 		philos[i].is_eating = 0;
@@ -70,7 +70,7 @@ void	init_forks(pthread_mutex_t *forks, int philo_nb)
 	i = 0;
 	while (i < philo_nb)
 	{
-		pthreadt_mutex_init(&forks[i], NULL);
+		pthread_mutex_init(&forks[i], NULL);
 		i++;
 	}
 }
@@ -102,3 +102,5 @@ int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
 ****
 ***
 */
+
+// ajouter des messages d'erreur quand l'initalisation de fonctionne pas ?

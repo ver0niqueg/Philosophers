@@ -6,15 +6,29 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:28:19 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/02 17:05:15 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:40:24 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/philo.h"
+#include "../inc/philo.h"
 
 // faire fonction pour recuperer le temps actuel
 // faire fonction pour faire une pause comme usleep
 // faire une fonction pour destroy les mutex !!
+
+int	is_digit(char *argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+	{
+		if (argv[i] < '0' || argv[i] > '9' || ft_strlen(argv[i] > 10))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 static int	ft_isspace(int c)
 {

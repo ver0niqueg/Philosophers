@@ -6,7 +6,13 @@ CC = cc
 RM = rm -f
 CFLAGS = -Werror -Wall -Wextra
 
-SRCS = $(SRCS_DIR)/
+SRCS = $(SRCS_DIR)/main.c					\
+			$(SRCS_DIR)/init_simulation.c	\
+			$(SRCS_DIR)/philo_actions.c		\
+			$(SRCS_DIR)/philo_routine.c		\
+			$(SRCS_DIR)/philo_monitoring.c	\
+			$(SRCS_DIR)/utils_1.c			\
+			$(SRCS_DIR)/utils_2.c			\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -16,11 +22,11 @@ $(NAME): $(OBJS)
 			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-			$(RM) $(NAME)
+			$(RM) $(OBJS)
 
 fclean: clean
 			$(RM) $(NAME)
 
-re: flcean all
+re: fclean all
 
 .PHONY: all clean fclean re

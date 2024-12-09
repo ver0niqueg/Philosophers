@@ -6,18 +6,18 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:29:49 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/06 19:20:16 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:39:14 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/philo.h"
+#include "../inc/philo.h"
 
 // faire une dead_loop pour check si un philo is dead
 
 /* fonction pour checker en boucle si un philo est dead */
 int	dead_loop(t_philo *philo)
 {
-	pthrad_mutex_lock(philo->dead_lock);
+	pthread_mutex_lock(philo->dead_lock);
 	// si le philo est mort
 	if (*philo->dead == 1)
 	{
@@ -63,9 +63,12 @@ int	create_philo_threads(t_simulation *simulation, pthread_mutex_t *forks)
 	while (i < simulation->philos[0].nb_of_philos)
 	{
 		// associer chaque philo a un thread
-		if (pthread_create(&simulation->philos[i].thread, NULL, &philo_routine,
-				&simulation->philos[i] != 0)) // retourne 0 si ca marche
-			destroy_mutex("Fail to create thread", simulation, forks);
+		if (pthread_create(&simulation->philos[i].thread, NULL, philo_routine,
+				&simulation->philos[i]) != 0) // retourne 0 si ca marche
+			{
+				destroy_mutex("Fail to create thread", simulation, forks);
+				return (1);
+			}
 		i++;
 	}
 	return (0);
@@ -91,11 +94,11 @@ int	start_simulation(t_simulation *simulation, pthread_mutex_t *forks)
 	pthread_t	monitor_thread;
 
 	// coder une fonction monitor
-	if (pthread_create(&monitor_thread, NULL, &monitor, simulation->philos != 0))
+	if (pthread_create(&monitor_thread, NULL, &philo_monitoring, simulation->philos) != 0)
 		destroy_mutex("Fail to create thread", simulation, forks);
 	create_philo_threads(simulation, forks);
 	// attendre que le thread de surveillance se termine
-	if (pthread_join(&monitor, NULL) != 0)
+	if (pthread_join(&philo_monitoring, NULL) != 0)
 		destroy_mutex("Fail to join thread", simulation, forks);
 	join_philo_threads(simulation, forks);
 	return (0);

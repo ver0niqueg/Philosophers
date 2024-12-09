@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 16:52:13 by vgalmich          #+#    #+#             */
+/*   Updated: 2024/12/09 19:20:53 by vgalmich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -6,6 +18,8 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+# define PHILO_MAX 300
 
 #endif
 
@@ -39,8 +53,7 @@ typedef struct	s_simulation
 	t_philo				*philos;
 }						t_simulation;
 
-/**** CHECKS *****/
-int			is_digit(char *argv);
+/**** MAIN *****/
 int			check_args(int argc, char **argv);
 
 /**** INITIALIZATION *****/
@@ -55,7 +68,6 @@ void		print_logs(char *str, t_philo *philo, int id);
 void		philo_is_thinking(t_philo *philos);
 void		philo_is_sleeping(t_philo *philos);
 void		philo_is_eating(t_philo *philo);
-int			philo_is_dead(t_philo *philo, size_t time_to_die);
 
 /*** PHILO ROUTINE ****/
 int			dead_loop(t_philo *philo);
@@ -64,10 +76,17 @@ int			create_philo_threads(t_simulation *simulation, pthread_mutex_t *forks);
 int			join_philo_threads(t_simulation *simulation, pthread_mutex_t *forks);
 int			start_simulation(t_simulation *simulation, pthread_mutex_t *forks);
 
+/**** PHILO MONITORING ****/
+int			philo_is_dead(t_philo *philo);
+int			dead_check(t_philo *philos);
+int			all_philos_are_full(t_philo *philos);
+void		*philo_monitoring(void *arg);
+
 /**** UTILS ****/
-static int	ft_isspace(int c);
+int			is_digit(char *argv);
 size_t		ft_strlen(const char *str);
 long		ft_atol(const char *str);
 int			get_time(void);
 int			ft_usleep(size_t milliseconds);
+void		destroy_mutex(char *str, t_simulation *simulation, pthread_mutex_t *forks);
 
