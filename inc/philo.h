@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:52:13 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/09 19:20:53 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:44:57 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int			all_philos_are_full(t_philo *philos);
 void		*philo_monitoring(void *arg);
 
 /**** UTILS ****/
-int			is_digit(char *argv);
+int			is_digit(char c);
 size_t		ft_strlen(const char *str);
 long		ft_atol(const char *str);
 int			get_time(void);

@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 19:21:18 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/09 19:23:33 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:47:40 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	all_philos_are_full(t_philo *philos)
 	{
 		pthread_mutex_lock(philos[i].meal_lock);
 		// si le philo courant a mange le nb de repas requis ou + on incremente
-		if (philos[i].meals_count >= philos[i].nb_of_times_to_eat);
+		if (philos[i].meals_count >= philos[i].nb_of_times_to_eat)
 			finished_eating++;
 		pthread_mutex_unlock(philos[i].meal_lock);
 		i++;
@@ -86,7 +86,7 @@ int	all_philos_are_full(t_philo *philos)
 	if (finished_eating == philos[0].nb_of_philos)
 	{
 		pthread_mutex_lock(philos[0].dead_lock);
-		*philos->dead == 1; // tous les philos ont fini de manger
+		*philos->dead = 1; // tous les philos ont fini de manger
 		pthread_mutex_unlock(philos[0].dead_lock);
 		return (1);
 	}
@@ -101,9 +101,8 @@ void	*philo_monitoring(void *arg)
 
 	while (1)
 	{
-		if (dead_check == 1 || all_philos_are_full == 1)
-		break;
+		if (dead_check(philos) == 1 || all_philos_are_full(philos) == 1)
+			break;
 	}
 	return (arg); // le pointeur initial est retourne
-
 }

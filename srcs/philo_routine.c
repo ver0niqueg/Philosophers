@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:29:49 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/09 19:39:14 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:44:42 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	*philo_routine(void *arg) // ou data ?
 	}
 	return (arg);
 }
+
 // pas besoin de rajouter un ft_usleep ?
 
 /* fonction pour creer les threads observer + philo */
@@ -98,7 +99,7 @@ int	start_simulation(t_simulation *simulation, pthread_mutex_t *forks)
 		destroy_mutex("Fail to create thread", simulation, forks);
 	create_philo_threads(simulation, forks);
 	// attendre que le thread de surveillance se termine
-	if (pthread_join(&philo_monitoring, NULL) != 0)
+	if (pthread_join(monitor_thread, NULL) != 0)
 		destroy_mutex("Fail to join thread", simulation, forks);
 	join_philo_threads(simulation, forks);
 	return (0);

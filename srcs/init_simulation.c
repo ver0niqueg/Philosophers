@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:25:01 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/09 18:44:05 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:01:40 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	init_philos(t_philo *philos, t_simulation *simulation,
 			philos[i].right_fork = &forks[philos[i].nb_of_philos - 1];
 		else
 			philos[i].right_fork = &forks[i - 1];
+		i++;
 	}
 }
 
@@ -83,6 +84,7 @@ void	init_simulation(t_simulation *simulation, t_philo *philos)
 	pthread_mutex_init(&simulation->print_lock, NULL);
 	pthread_mutex_init(&simulation->dead_lock, NULL);
 	pthread_mutex_init(&simulation->meal_lock, NULL);
+	printf("Initialisation success\n");
 
 }
 
