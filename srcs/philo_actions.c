@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:23:25 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/09 19:23:42 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:13:11 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	philo_is_eating(t_philo *philo)
 	// verrou pour les fourchettes
 	pthread_mutex_lock(philo->left_fork);
 	print_logs("has taken a fork", philo, philo->id);
+	// ajouter pour que les philo impairs prennent la fourchette droite
 	pthread_mutex_lock(philo->right_fork);
 	print_logs("has taken a fork", philo, philo->id);
 	if (!philo->is_eating)
