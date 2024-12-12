@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:23:25 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/10 18:13:11 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:16:14 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,21 @@ void	philo_is_sleeping(t_philo *philo)
 void	philo_is_eating(t_philo *philo)
 {
 	// verrou pour les fourchettes
-	pthread_mutex_lock(philo->left_fork);
-	print_logs("has taken a fork", philo, philo->id);
-	// ajouter pour que les philo impairs prennent la fourchette droite
 	pthread_mutex_lock(philo->right_fork);
 	print_logs("has taken a fork", philo, philo->id);
-	if (!philo->is_eating)
+	// ajouter pour que les philo impairs prennent la fourchette droite
+	if (philo->nb_of_philos == 1)
 	{
-		philo->is_eating = 1; // indique que le philo mange
-		print_logs("is eating", philo, philo->id);
-		// verrou pour le meal_lock
-		pthread_mutex_lock(philo->meal_lock);
+		ft_usleep(philo->time_to_die);
+		pthread_mutex_unlock(philo->right_fork);
+		return ;
 	}
+	pthread_mutex_lock(philo->left_fork);
+	print_logs("has taken a fork", philo, philo->id);
+	philo->is_eating = 1; // indique que le philo mange
+	print_logs("is eating", philo, philo->id);
+	// verrou pour le meal_lock
+	pthread_mutex_lock(philo->meal_lock);
 	// recuperer le temps
 	philo->last_meal = get_time();
 	// incrementer le nb de repas manges

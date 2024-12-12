@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 19:21:18 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/10 16:47:40 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:09:18 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,10 @@ int	all_philos_are_full(t_philo *philos)
 void	*philo_monitoring(void *arg)
 {
 	t_philo	*philos;
-	philos = (t_philo *)arg;
 
+	philos = (t_philo *)arg;
 	while (1)
-	{
 		if (dead_check(philos) == 1 || all_philos_are_full(philos) == 1)
 			break;
-	}
 	return (arg); // le pointeur initial est retourne
 }
