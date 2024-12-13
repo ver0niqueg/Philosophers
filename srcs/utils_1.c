@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:28:19 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/13 18:36:16 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:55:36 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,20 @@
 
 int is_digit(char *str)
 {
-    int i = 0;
+	int i;
 
-    if (!str || !str[i]) // Vérifie si la chaîne est vide
-        return (1);
-
-    // Si le premier caractère est un signe, on renvoie une erreur
-    if (str[i] == '+' || str[i] == '-')
-        return (1);
-
-    // Vérifie que tous les caractères suivants sont des chiffres
-    while (str[i])
-    {
-        if (str[i] < '0' || str[i] > '9') // Si un caractère n'est pas un chiffre
-            return (1);
-        i++;
-    }
-
-    return (0); // La chaîne est valide si elle ne contient que des chiffres
+	i = 0;
+	if (!str || !str[i])
+		return (1);
+	if (str[i] == '+' || str[i] == '-')
+		return (1);
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (1);
+		i++;
+	}
+	return (0); // La chaîne est valide si elle ne contient que des chiffres
 }
 
 static int	is_space(char c)
