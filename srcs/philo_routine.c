@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:29:49 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/10 18:04:02 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:33:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	create_philo_threads(t_simulation *simulation, pthread_mutex_t *forks)
 	while (i < simulation->philos[0].nb_of_philos)
 	{
 		// associer chaque philo a un thread
-		if (pthread_create(&simulation->philos[i].thread, NULL, philo_routine,
+		if (pthread_create(&simulation->philos[i].thread, NULL, &philo_routine,
 				&simulation->philos[i]) != 0) // retourne 0 si ca marche
 			{
 				destroy_mutex("Fail to create thread", simulation, forks);

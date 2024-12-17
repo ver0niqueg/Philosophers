@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_monitoring.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 19:21:18 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/12 17:09:18 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:29:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@
 temps ecoule depuis son dernier repas. Si ce temps est >
 au time_to_die et si le philo n'est pas en train de manger,
 la fonction considere que le philo est dead */
-int	philo_is_dead(t_philo *philo)
+int	philo_is_dead(t_philo *philo, size_t time_to_die)
 {
 	pthread_mutex_lock(philo->meal_lock);
 	// condition pour check si le temps ecoule depuis le last meal est > au
 	// temps a un philo pour mourir
-	if (get_time() - philo->last_meal >= philo->time_to_die && philo->is_eating == 0)
+	if (get_time() - philo->last_meal >= time_to_die && philo->is_eating == 0)
 	{
 		pthread_mutex_unlock(philo->meal_lock);
 		return (1); // oui il est dead
@@ -46,12 +46,12 @@ int	dead_check(t_philo *philos)
 	i = 0;
 	while (i < philos[0].nb_of_philos)
 	{
-		if (philo_is_dead(&philos[i]))
+		if (philo_is_dead(&philos[i], philos[i].time_to_die))
 		{
 			print_logs("died", &philos[i], philos[i].id);
-			pthread_mutex_lock(philos[0].dead_lock); // pourquoi rajouter philos[0]. ?
-			*philos->dead = 1;
-			pthread_mutex_unlock(philos[0].dead_lock);
+			pthread_mutex_lock(philos[i].dead_lock); // pourquoi rajouter philos[0]. ?
+			*philos[i].dead = 1;
+			pthread_mutex_unlock(philos[i].dead_lock);
 			return (1);
 		}
 		i++;

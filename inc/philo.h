@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:52:13 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/13 18:35:40 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:23:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			join_philo_threads(t_simulation *simulation, pthread_mutex_t *forks);
 int			start_simulation(t_simulation *simulation, pthread_mutex_t *forks);
 
 /**** PHILO MONITORING ****/
-int			philo_is_dead(t_philo *philo);
+int			philo_is_dead(t_philo *philo, size_t time_to_die);
 int			dead_check(t_philo *philos);
 int			all_philos_are_full(t_philo *philos);
 void		*philo_monitoring(void *arg);
