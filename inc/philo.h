@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:52:13 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/17 17:23:51 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/17 18:18:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-# define PHILO_MAX 300
+# define PHILO_MAX 200
 
 #endif
 

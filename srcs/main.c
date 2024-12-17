@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:18:34 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/17 18:04:56 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/17 18:20:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_args(int argc, char **argv)
 
 	if (argc != 5)
 		return (0);
-	if (ft_atol(argv[1]) <= 0 || is_digit(argv[1]) == 1)
+	if (ft_atol(argv[1]) > PHILO_MAX || ft_atol(argv[1]) <= 0 || is_digit(argv[1]) == 1)
 		return (printf("Invalid number of philosophers\n"), 1);
 	if (ft_atol(argv[2]) <= 0 || is_digit(argv[2]) == 1)
 		return (printf("Invalid time to die\n"), 1);
