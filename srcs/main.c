@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:18:34 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/13 18:47:56 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:04:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ int main(int argc, char **argv)
 	init_philos(philos, &simulation, forks, argv);
 	start_simulation(&simulation, forks);
 	destroy_mutex("End of simulation", &simulation, forks);
+	return (0);
 }

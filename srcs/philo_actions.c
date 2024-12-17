@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:23:25 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/17 17:35:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/17 18:05:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_logs(char *str, t_philo *philo, int id)
 	pthread_mutex_lock(philo->print_lock);
 	time = get_time() - philo->start_time;
 	// check de l'etat du programme (si un philo est mort par ex)
-	if (!philo_is_dead(philo, time)) // coder fonction philo_dead
+	if (!dead_loop(philo)) // coder fonction philo_dead
 		// affiche <temps ecoule> <id du philo> et <l'action>
 		printf("%zu, %d, %s\n", time, id, str);
 	// unlock le verrou
