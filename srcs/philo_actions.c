@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:23:25 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/17 18:05:54 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/20 18:21:42 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_logs(char *str, t_philo *philo, int id)
 	// check de l'etat du programme (si un philo est mort par ex)
 	if (!dead_loop(philo)) // coder fonction philo_dead
 		// affiche <temps ecoule> <id du philo> et <l'action>
-		printf("%zu, %d, %s\n", time, id, str);
+		printf("%zu %d %s\n", time, id, str);
 	// unlock le verrou
 	pthread_mutex_unlock(philo->print_lock);
 }

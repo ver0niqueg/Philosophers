@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:52:13 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/17 18:18:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/20 18:26:11 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct	s_simulation
 }						t_simulation;
 
 /**** MAIN *****/
-int			check_args(int argc, char **argv);
+int			check_args(char **argv);
 
 /**** INITIALIZATION *****/
 void		init_input(t_philo *philo, char **argv);

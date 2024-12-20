@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:18:34 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/17 18:20:46 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/20 18:30:56 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	check_args(int argc, char **argv)
+int	check_args(char **argv)
 {
-
-	if (argc != 5)
-		return (0);
 	if (ft_atol(argv[1]) > PHILO_MAX || ft_atol(argv[1]) <= 0 || is_digit(argv[1]) == 1)
 		return (printf("Invalid number of philosophers\n"), 1);
 	if (ft_atol(argv[2]) <= 0 || is_digit(argv[2]) == 1)
@@ -36,10 +33,9 @@ int main(int argc, char **argv)
 	t_philo			philos[PHILO_MAX];
 	pthread_mutex_t	forks[PHILO_MAX];
 
-	printf("start program\n");
 	if (argc != 5 && argc != 6)
 		return (printf("Invalid number of arguments\n"), 1);
-	if (check_args(argc, argv) == 1)
+	if (check_args(argv) == 1)
 		return (1);
 	init_simulation(&simulation, philos);
 	init_forks(forks, ft_atol(argv[1]));
