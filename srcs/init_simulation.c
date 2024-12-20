@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:25:01 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/10 17:01:40 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:23:08 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,22 @@ parametres necessaires */
 void	init_philos(t_philo *philos, t_simulation *simulation,
 	pthread_mutex_t *forks, char **argv)
 {
-	int	i; // variable pour iterer sur chaque philo
+	int	i;
 
 	i = 0;
 	while (i < ft_atol(argv[1]))
 	{
-		philos[i].id = i + 1; // les id commencent a 1
+		philos[i].id = i + 1;
 		philos[i].is_eating = 0;
 		philos[i].meals_count = 0;
 		init_input(&philos[i], argv);
 		philos[i].last_meal = get_time();
 		philos[i].start_time = get_time();
-		// pour une synchronisation des messages
 		philos[i].print_lock = &simulation->print_lock;
-		// pour gerer l'etat de mort du philosophe
 		philos[i].dead_lock = &simulation->dead_lock;
-		// pour eviter que 2 philos mangent en meme temps
 		philos[i].meal_lock = &simulation->meal_lock;
-		// pour check de facon centralisee si la simulation doit se terminer
-		philos[i].dead = &simulation->dead_flag;
-		// chaque philo prend la fourchette a gauche
+		philos[i].dead = &simulation->death_detected;
 		philos[i].left_fork = &forks[i];
-		// si le philo est le premier il prend la derniere fourchette
 		if (i == 0)
 			philos[i].right_fork = &forks[philos[i].nb_of_philos - 1];
 		else
@@ -66,7 +60,7 @@ doivent etre partagees entre les philos de maniere synchro pour eviter
 les conflits (un philo qui essaye d'utiliser une fourchette deja prise) */
 void	init_forks(pthread_mutex_t *forks, int philo_nb)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < philo_nb)
@@ -79,13 +73,12 @@ void	init_forks(pthread_mutex_t *forks, int philo_nb)
 // function to initialize the structure
 void	init_simulation(t_simulation *simulation, t_philo *philos)
 {
-	simulation->dead_flag = 0;
+	simulation->death_detected = 0;
 	simulation->philos = philos;
 	pthread_mutex_init(&simulation->print_lock, NULL);
 	pthread_mutex_init(&simulation->dead_lock, NULL);
 	pthread_mutex_init(&simulation->meal_lock, NULL);
 	printf("Initialisation success\n");
-
 }
 
 /*
