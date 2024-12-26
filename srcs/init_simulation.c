@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:25:01 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/20 20:23:08 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/26 15:59:55 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,27 +58,30 @@ void	init_philos(t_philo *philos, t_simulation *simulation,
 /* fonction qui utilise des mutex pour les fourchettes = les fourchettes
 doivent etre partagees entre les philos de maniere synchro pour eviter
 les conflits (un philo qui essaye d'utiliser une fourchette deja prise) */
-void	init_forks(pthread_mutex_t *forks, int philo_nb)
+int	init_forks(pthread_mutex_t *forks, int philo_nb)
 {
 	int	i;
 
 	i = 0;
 	while (i < philo_nb)
 	{
-		pthread_mutex_init(&forks[i], NULL);
+		if (pthread_mutex_init(&forks[i], NULL) != 0)
+			return (printf("Failed to initialize\n"), -1);
 		i++;
 	}
+	return (0);
 }
 
 // function to initialize the structure
-void	init_simulation(t_simulation *simulation, t_philo *philos)
+int	init_simulation(t_simulation *simulation, t_philo *philos)
 {
 	simulation->death_detected = 0;
 	simulation->philos = philos;
-	pthread_mutex_init(&simulation->print_lock, NULL);
-	pthread_mutex_init(&simulation->dead_lock, NULL);
-	pthread_mutex_init(&simulation->meal_lock, NULL);
-	printf("Initialisation success\n");
+	if (pthread_mutex_init(&simulation->print_lock, NULL) != 0
+		|| pthread_mutex_init(&simulation->dead_lock, NULL) != 0
+		|| pthread_mutex_init(&simulation->meal_lock, NULL) != 0)
+		return (printf("Failed to initialize\n"), -1);
+	return (0);
 }
 
 /*

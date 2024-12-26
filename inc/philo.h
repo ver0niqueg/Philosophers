@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:52:13 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/20 20:14:15 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/26 14:59:13 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int			check_args(char **argv);
 void		init_input(t_philo *philo, char **argv);
 void		init_philos(t_philo *philos, t_simulation *simulation,
 				pthread_mutex_t *forks, char **argv);
-void		init_forks(pthread_mutex_t *forks, int philo_nb);
-void		init_simulation(t_simulation *simulation, t_philo *philos);
+int			init_forks(pthread_mutex_t *forks, int philo_nb);
+int			init_simulation(t_simulation *simulation, t_philo *philos);
 
 /**** ACTIONS *****/
 void		print_logs(char *str, t_philo *philo, int id);

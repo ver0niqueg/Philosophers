@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:23:25 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/20 18:21:42 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/26 14:27:07 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 /* fonction pour afficher un message dans un environnement ou il y a plusieurs
 threads -> le but est d'afficher des messages simultanement en utilisant un
-mutex pour synchroniser l'acces a l'operation d'ecriture */
+mutex pour synchroniser l'acces a l'operation d'ecriture
+affiche <temps ecoule> <id du philo> et <l'action> */
 void	print_logs(char *str, t_philo *philo, int id)
 {
 	size_t	time;
-	// verrou pour qu'un seul thread a la fois ecrive
+
 	pthread_mutex_lock(philo->print_lock);
 	time = get_time() - philo->start_time;
-	// check de l'etat du programme (si un philo est mort par ex)
-	if (!dead_loop(philo)) // coder fonction philo_dead
-		// affiche <temps ecoule> <id du philo> et <l'action>
+	if (!dead_loop(philo))
 		printf("%zu %d %s\n", time, id, str);
-	// unlock le verrou
 	pthread_mutex_unlock(philo->print_lock);
 }
 
@@ -39,16 +37,13 @@ void	philo_is_thinking(t_philo *philo)
 void	philo_is_sleeping(t_philo *philo)
 {
 	print_logs("is sleeping", philo, philo->id);
-	// simulation du comportement is_sleeping avec une pause
 	ft_usleep(philo->time_to_sleep);
 }
 
 void	philo_is_eating(t_philo *philo)
 {
-	// verrou pour les fourchettes
 	pthread_mutex_lock(philo->right_fork);
 	print_logs("has taken a fork", philo, philo->id);
-	// ajouter pour que les philo impairs prennent la fourchette droite
 	if (philo->nb_of_philos == 1)
 	{
 		ft_usleep(philo->time_to_die);
@@ -57,22 +52,14 @@ void	philo_is_eating(t_philo *philo)
 	}
 	pthread_mutex_lock(philo->left_fork);
 	print_logs("has taken a fork", philo, philo->id);
-	philo->is_eating = 1; // indique que le philo mange
+	philo->is_eating = 1;
 	print_logs("is eating", philo, philo->id);
-	// verrou pour le meal_lock
 	pthread_mutex_lock(philo->meal_lock);
-	// recuperer le temps
 	philo->last_meal = get_time();
-	// incrementer le nb de repas manges
 	philo->meals_count++;
-	// deverouillage du meal_lock
 	pthread_mutex_unlock(philo->meal_lock);
-	// faire un pause le temps du repas
 	ft_usleep(philo->time_to_eat);
 	philo->is_eating = 0;
-	// repas termine on peut unlock les forks
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 }
-
-// gerer le cas lorsqu'il n'y a qu'un seul philo ??

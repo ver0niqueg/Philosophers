@@ -6,7 +6,7 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:28:19 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/13 18:55:36 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/26 14:34:31 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 // faire fonction pour faire une pause comme usleep
 // faire une fonction pour destroy les mutex !!
 
-int is_digit(char *str)
+int	is_digit(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str || !str[i])
@@ -31,7 +31,7 @@ int is_digit(char *str)
 			return (1);
 		i++;
 	}
-	return (0); // La chaîne est valide si elle ne contient que des chiffres
+	return (0);
 }
 
 static int	is_space(char c)
