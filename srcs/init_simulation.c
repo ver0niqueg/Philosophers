@@ -6,14 +6,12 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:25:01 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/26 15:59:55 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/27 19:34:15 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-/* fonction pour initialiser l'input = conversion des arguments char en int
-grace a la fonction ft_atoi */
 void	init_input(t_philo *philo, char **argv)
 {
 	philo->nb_of_philos = ft_atol(argv[1]);
@@ -57,7 +55,7 @@ void	init_philos(t_philo *philos, t_simulation *simulation,
 
 /* fonction qui utilise des mutex pour les fourchettes = les fourchettes
 doivent etre partagees entre les philos de maniere synchro pour eviter
-les conflits (un philo qui essaye d'utiliser une fourchette deja prise) */
+les conflits */
 int	init_forks(pthread_mutex_t *forks, int philo_nb)
 {
 	int	i;
@@ -72,7 +70,6 @@ int	init_forks(pthread_mutex_t *forks, int philo_nb)
 	return (0);
 }
 
-// function to initialize the structure
 int	init_simulation(t_simulation *simulation, t_philo *philos)
 {
 	simulation->death_detected = 0;
@@ -83,22 +80,3 @@ int	init_simulation(t_simulation *simulation, t_philo *philos)
 		return (printf("Failed to initialize\n"), -1);
 	return (0);
 }
-
-/*
-***
-****
-
-pthread_mutex_init est une fonction de la bibliotheque POSIX
-utilisee pour initialiser un mutex, qui est une primitive de
-synchronisation. Un mutex est utilise pour proteger des sections
-du code, en assurant qu'un seul thread a la fois peut acceder a
-une ressource partagee (=fourchette)
-
-Voici son prototype :
-int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
-
-****
-***
-*/
-
-// ajouter des messages d'erreur quand l'initalisation de fonctionne pas ?

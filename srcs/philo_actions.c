@@ -6,16 +6,15 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:23:25 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/26 14:27:07 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/27 15:51:03 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-/* fonction pour afficher un message dans un environnement ou il y a plusieurs
-threads -> le but est d'afficher des messages simultanement en utilisant un
-mutex pour synchroniser l'acces a l'operation d'ecriture
-affiche <temps ecoule> <id du philo> et <l'action> */
+/* fonction pour afficher un message -> le but est d'afficher des messages
+simultanement en utilisant un mutex pour synchroniser l'acces a l'operation
+d'ecriture affiche <temps ecoule> <id du philo> et <l'action> */
 void	print_logs(char *str, t_philo *philo, int id)
 {
 	size_t	time;

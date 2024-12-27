@@ -6,24 +6,14 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 19:21:18 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/26 14:29:31 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/27 15:49:25 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-// 2 cas d'arret de la simulation : un mort ou le nb de repas requ
-// is a ete atteint
-// fichier monitoring "surveillance de la simulation"
-// checker si un philo est mort, si tout le monde a mange, etc...
-
-// fonction qui verifie si un philo donne est dead / appel dans la 2e
-// fonction qui verifie si un philo est dead
-
 /* fonction qui check si un philo est mort en fonction du
-temps ecoule depuis son dernier repas. Si ce temps est >
-au time_to_die et si le philo n'est pas en train de manger,
-la fonction considere que le philo est dead */
+temps ecoule depuis son dernier repas.*/
 int	philo_is_dead(t_philo *philo, size_t time_to_die)
 {
 	pthread_mutex_lock(philo->meal_lock);

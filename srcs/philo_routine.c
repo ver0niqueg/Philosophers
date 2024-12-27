@@ -6,15 +6,14 @@
 /*   By: vgalmich <vgalmich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:29:49 by vgalmich          #+#    #+#             */
-/*   Updated: 2024/12/26 14:33:42 by vgalmich         ###   ########.fr       */
+/*   Updated: 2024/12/27 17:26:04 by vgalmich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-// faire une dead_loop pour check si un philo is dead
-
-/* fonction pour checker en boucle si un philo est dead */
+/* fonction pour checker en boucle si un philo est dead, est-ce que
+death_detected a change de valeur ? */
 int	dead_loop(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead_lock);
@@ -28,7 +27,7 @@ int	dead_loop(t_philo *philo)
 }
 
 /* fonction routine de thread avec les actions qu'un philo execute lors
-de la simulation */
+de la simulation, depart decale pour les philos pairs */
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
@@ -45,7 +44,7 @@ void	*philo_routine(void *arg)
 	return (arg);
 }
 
-/* fonction pour creer les threads observer + philo */
+/* fonction pour creer les philo threads */
 int	create_philo_threads(t_simulation *simulation, pthread_mutex_t *forks)
 {
 	int	i;
@@ -64,6 +63,8 @@ int	create_philo_threads(t_simulation *simulation, pthread_mutex_t *forks)
 	return (0);
 }
 
+/* fonction qui synchronise les threads, elle permet d'attendre la fin d'un
+thread specifique, de recuperer son resultat et de liberer ses ressources */
 int	join_philo_threads(t_simulation *simulation, pthread_mutex_t *forks)
 {
 	int	i;
